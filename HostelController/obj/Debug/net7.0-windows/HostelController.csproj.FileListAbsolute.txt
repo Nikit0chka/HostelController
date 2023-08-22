@@ -67,5 +67,7 @@ C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelControlle
 C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\Pages\HistoryPage.baml
 C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\Pages\CurrentRoomStatus.g.cs
 C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\Pages\CurrentRoomStatus.baml
-C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\Pages\Rooms\Room.baml
-C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\Pages\Rooms\Room.g.cs
+C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\Pages\BedAdministrationPage.baml
+C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\Pages\BedAdministrationPage.g.cs
+C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\Pages\RoomInfoPage.baml
+C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\Pages\RoomInfoPage.g.cs

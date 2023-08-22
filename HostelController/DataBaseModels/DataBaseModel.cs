@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataBaseModels;
+namespace HostelController.DataBaseModels;
 
 public class Client
 {
@@ -17,12 +17,13 @@ public class Client
 public class Room
 {
     public int Id { get; set; }
-    public List<Bed> Beds { get; set; }
+    public ICollection<Bed> Beds { get; set; }
 }
 
 public class Bed
 {
     public int Id { get; set; }
+    public int Number { get; set; }
     public int RoomId { get; set; }
     public Room Room { get; set; }
     public bool IsOccupied { get; set; }

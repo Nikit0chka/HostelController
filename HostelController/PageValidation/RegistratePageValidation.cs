@@ -1,7 +1,9 @@
-﻿using System.Linq;
+﻿using System;
 using System.ComponentModel;
+using System.Globalization;
+using System.Linq;
 
-namespace HostelController;
+namespace HostelController.PageValidation;
 
 internal class RegistratePageValidation : IDataErrorInfo
 {
@@ -17,46 +19,57 @@ internal class RegistratePageValidation : IDataErrorInfo
     {
         get
         {
-            string ErorInfo = string.Empty;
+            string errorInfo = string.Empty;
 
             switch (columnName)
             {
                 case "Name":
                     if (string.IsNullOrWhiteSpace(Name))
-                        ErorInfo = "Имя должно быть заполнено!";
+                        errorInfo = "Имя должно быть заполнено!";
                     else if (!Name.All(char.IsLetter))
-                        ErorInfo = "Имя должно содержать только буквы";
+                        errorInfo = "Имя должно содержать только буквы";
                     break;
                 case "Surname":
                     if (string.IsNullOrWhiteSpace(Surname))
-                        ErorInfo = "Фамилия должна быть заполнена!";
+                        errorInfo = "Фамилия должна быть заполнена!";
                     else if (!Surname.All(char.IsLetter))
-                        ErorInfo = "Фамилия должна содержать только буквы!";
+                        errorInfo = "Фамилия должна содержать только буквы!";
                     break;
                 case "RoomNumber":
                     if (string.IsNullOrWhiteSpace(RoomNumber))
-                        ErorInfo = "Номер комнаты должен быть заполнен!";
+                        errorInfo = "Номер комнаты должен быть заполнен!";
                     break;
                 case "BedNumber":
                     if (string.IsNullOrWhiteSpace(BedNumber))
-                        ErorInfo = "Номер кровати должен быть заполнен!";
+                        errorInfo = "Номер кровати должен быть заполнен!";
                     break;
                 case "DateOfEntry":
+                    DateTime.TryParseExact(DateOfEntry, "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime DateOfEntryDtTime);
+
                     if (string.IsNullOrWhiteSpace(DateOfEntry))
-                        ErorInfo = "Дата въезда должна быть заполнена!";
+                        errorInfo = "Дата въезда должна быть заполнена!";
+                    else if (DateOfEntryDtTime.Date < DateTime.Now.Date)
+                        errorInfo = "Дата въезда не может быть меньше текущей!";
                     break;
                 case "TimeOfEntry":
+                    DateTime.TryParseExact(TimeOfEntry, "dd.MM.yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime TimeOfEntryDtTime);
+
                     if (string.IsNullOrWhiteSpace(TimeOfEntry))
-                        ErorInfo = "Время въезда должно быть заполнено!";
+                        errorInfo = "Время въезда должно быть заполнено!";
+                    else if (TimeSpan.Compare(DateTime.Now - TimeOfEntryDtTime, TimeSpan.FromMinutes(2)) > 0)
+                        errorInfo = "Время въезда не может быть меньше текущего!";
                     break;
                 case "ValueOfDays":
                     if (string.IsNullOrWhiteSpace(ValueOfDays))
-                        ErorInfo = "Число дней должно быть заполнено!";
+                        errorInfo = "Число дней должно быть заполнено!";
                     break;
             }
-            return ErorInfo;
+            return errorInfo;
         }
     }
 
-    public string Error => throw new System.NotImplementedException();
+    public string Error
+    {
+        get { return "Общая ошибка модели данных"; }
+    }
 }

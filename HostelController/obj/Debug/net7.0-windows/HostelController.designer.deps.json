@@ -52,14 +52,14 @@
           }
         }
       },
-      "MahApps.Metro/2.4.9": {
+      "MahApps.Metro/2.4.10": {
         "dependencies": {
           "ControlzEx": "4.4.0"
         },
         "runtime": {
           "lib/netcoreapp3.1/MahApps.Metro.dll": {
             "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.4.9.2"
+            "fileVersion": "2.4.10.1"
           }
         },
         "resources": {
@@ -763,12 +763,12 @@
       "path": "controlzex/4.4.0",
       "hashPath": "controlzex.4.4.0.nupkg.sha512"
     },
-    "MahApps.Metro/2.4.9": {
+    "MahApps.Metro/2.4.10": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-eMTkg6TBnCwHzszw7CP+pxsBeB4ZMsJFiTJJoifUVBysRyEenzzR+TKQJuMvvKK6KzvLxwHmJsFhi9o5p4vxhQ==",
-      "path": "mahapps.metro/2.4.9",
-      "hashPath": "mahapps.metro.2.4.9.nupkg.sha512"
+      "sha512": "sha512-45exHKJCVYaD1/rNr3ekZPECEBM4uHOt6aYp6yNaJbliFMUo+d3z8Gi1xG+qEkbiHKITX+dlz+BW1FOsjAbl/w==",
+      "path": "mahapps.metro/2.4.10",
+      "hashPath": "mahapps.metro.2.4.10.nupkg.sha512"
     },
     "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
       "type": "package",

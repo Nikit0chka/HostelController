@@ -16,9 +16,8 @@
             <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        
+
         <StackPanel Grid.Column="0" Margin="1 2 0 0">
-            <Button x:Name="AddClientButt" Style="{DynamicResource MahApps.Styles.Button.Square.Accent}" BorderBrush="White" Height="70" Content="Зарегестрировать" FontSize="16" Click="AddClientButt_Click"/>
             <Button x:Name="ShowHistoryButt" Style="{DynamicResource MahApps.Styles.Button.Square.Accent}" BorderBrush="White" Height="70" Content="История" FontSize="16" />
             <Button x:Name="ShowRoomsButt" Style="{DynamicResource MahApps.Styles.Button.Square.Accent}" BorderBrush="White" Height="70" Content="Комнаты" FontSize="16" Click="ShowRoomsButt_Click" />
         </StackPanel>

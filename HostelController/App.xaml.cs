@@ -12,13 +12,11 @@ public partial class App : Application
 {
     public static StringBuilder GetValidationErrors(DependencyObject container)
     {
-        StringBuilder errorContent = new StringBuilder();
+        StringBuilder errorContent = new();
 
         foreach (var child in LogicalTreeHelper.GetChildren(container))
         {
-            DependencyObject element = child as DependencyObject;
-
-            if (element == null)
+            if (child is not DependencyObject element)
                 continue;
 
             if (Validation.GetHasError(element))

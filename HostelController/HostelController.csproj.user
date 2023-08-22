@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Pages\BedAdministrationPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\CurrentRoomStatus.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -16,12 +19,15 @@
     <Compile Update="Pages\RegistratePage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\Rooms\Room.xaml.cs">
+    <Compile Update="Pages\RoomInfoPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\BedAdministrationPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\CurrentRoomStatus.xaml">
@@ -33,7 +39,7 @@
     <Page Update="Pages\RegistratePage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\Rooms\Room.xaml">
+    <Page Update="Pages\RoomInfoPage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

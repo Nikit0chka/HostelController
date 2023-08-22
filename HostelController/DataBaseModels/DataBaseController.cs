@@ -1,38 +1,122 @@
-﻿using HostelController;
-
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace DataBaseModels;
+namespace HostelController.DataBaseModels;
 
-internal static class DataBaseController
+internal class DataBaseController
 {
-    private static DataBaseContext _dbContext = new DataBaseContext();
+    private static readonly DataBaseContext _dbContext = new();
 
     public static void AddClient(string name, string surname, int bedId, DateTime checkInDate, DateTime checkOutDate)
     {
-        if (_dbContext.Beds.Any(c => c.Id == bedId))
+        try
         {
-            try
+            Client newCLient = new()
             {
-                _dbContext.Clients.Add(new Client
-                {
-                    Name = name,
-                    Surname = surname,
-                    BedId = bedId,
-                    ClientBed = _dbContext.Beds.Where(c => c.Id == bedId).First(),
-                    CheckInDate = checkInDate,
-                    CheckOutDate = checkOutDate,
-                });
-                _dbContext.SaveChangesAsync();  
-                App.ShowMessageBox("", "Гость добавлен!");              
-            }
-            catch (Exception ex)
-            {
-                App.ShowMessageBox("Exception!", ex.ToString());
-            }            
+                Name = name,
+                Surname = surname,
+                BedId = bedId,
+                ClientBed = _dbContext.Beds.First(c => c.Id == bedId),
+                CheckInDate = checkInDate,
+                CheckOutDate = checkOutDate,
+            };
+
+            _dbContext.Clients.Add(newCLient);
+            _dbContext.SaveChanges();
+            App.ShowMessageBox("", "Гость добавлен!");
+
+            UpdateBedStatus(bedId, true);
         }
-        else
-            App.ShowMessageBox("", "Кровать с таким номером не зарегестрирована!");
+        catch (Exception ex)
+        {
+            App.ShowMessageBox("Exception!", ex.Message);
+        }
     }
+
+    public static void UpdateBedStatus(int bedId, bool isOccupied)
+    {
+        try
+        {
+            Bed bed = _dbContext.Beds.First(c => c.Id == bedId);
+            bed.IsOccupied = isOccupied;
+        }
+        catch (Exception ex)
+        {
+            App.ShowMessageBox("", ex.Message);
+        }
+
+        _dbContext.SaveChanges();
+    }
+
+    public static Client GetClientByBedId(int bedId)
+    {
+        try
+        {
+            return _dbContext.Clients.Where(c => c.BedId == bedId).FirstOrDefault();
+        }
+        catch (Exception ex)
+        {
+            App.ShowMessageBox("", ex.Message);
+            return null;
+        }
+    }
+
+    public static List<Bed> GetBedsListByRoomId(int roomId)
+    {
+        try
+        {
+            return _dbContext.Beds.Where(c => c.RoomId == roomId).ToList();
+        }
+        catch (Exception ex)
+        {
+            App.ShowMessageBox("", ex.Message);
+            return null;
+        }
+    }
+
+    public static Bed GetBedById(int bedId)
+    {
+        try
+        {
+            return _dbContext.Beds.Find(bedId);
+        }
+        catch (Exception ex)
+        {
+            App.ShowMessageBox("", ex.Message);
+            return null;
+        }
+    }
+
+    public static Room GetRoomById(int roomId)
+    {
+        try
+        {
+            return _dbContext.Rooms.First(c => c.Id == roomId);
+        }
+        catch (Exception ex)
+        {
+            App.ShowMessageBox("", ex.Message);
+            return null;
+        }
+    }
+
+    public static void RemoveClientById(int clientId)
+    {
+        try
+        {
+            Client removedClient = _dbContext.Clients.FirstOrDefault(c => c.Id == clientId);
+
+            UpdateBedStatus(removedClient.BedId, false);
+            _dbContext.Clients.Remove(removedClient);
+
+            App.ShowMessageBox("", "Гость выселен!");
+            _dbContext.SaveChanges();
+        }
+        catch (Exception ex)
+        {
+            App.ShowMessageBox("", ex.Message);
+        }
+    }
+
 }

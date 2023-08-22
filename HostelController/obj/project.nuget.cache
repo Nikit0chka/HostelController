@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "D1H1xkuiGYAY4xIKi54YgJkCjogEAA3j2TzswuhndujuKQkPp/K4eZ8CfD88K5MfnP2eHq0plR9Nh9WFHAzRGQ==",
+  "dgSpecHash": "zAX6VG7wtM1dNXEqP0fOIHIHR6ilP5OvD/Ve0Sg+IPSgzfdQzImkfKlZx8m7nUVxS2qPSIZscjpBLNqDnlCOlg==",
   "success": true,
   "projectFilePath": "C:\\Users\\voron\\OneDrive\\Рабочий стол\\HostelController\\HostelController\\HostelController.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\voron\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\voron\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\voron\\.nuget\\packages\\controlzex\\4.4.0\\controlzex.4.4.0.nupkg.sha512",
-    "C:\\Users\\voron\\.nuget\\packages\\mahapps.metro\\2.4.9\\mahapps.metro.2.4.9.nupkg.sha512",
+    "C:\\Users\\voron\\.nuget\\packages\\mahapps.metro\\2.4.10\\mahapps.metro.2.4.10.nupkg.sha512",
     "C:\\Users\\voron\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\voron\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\voron\\.nuget\\packages\\microsoft.data.sqlclient\\5.0.2\\microsoft.data.sqlclient.5.0.2.nupkg.sha512",

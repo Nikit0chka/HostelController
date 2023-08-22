@@ -66,7 +66,7 @@
           "Microsoft.WindowsDesktop.App.WPF"
         ]
       },
-      "MahApps.Metro/2.4.9": {
+      "MahApps.Metro/2.4.10": {
         "type": "package",
         "dependencies": {
           "ControlzEx": "[4.4.0, 6.0.0)"
@@ -1153,10 +1153,10 @@
         "logo-mini.png"
       ]
     },
-    "MahApps.Metro/2.4.9": {
-      "sha512": "eMTkg6TBnCwHzszw7CP+pxsBeB4ZMsJFiTJJoifUVBysRyEenzzR+TKQJuMvvKK6KzvLxwHmJsFhi9o5p4vxhQ==",
+    "MahApps.Metro/2.4.10": {
+      "sha512": "45exHKJCVYaD1/rNr3ekZPECEBM4uHOt6aYp6yNaJbliFMUo+d3z8Gi1xG+qEkbiHKITX+dlz+BW1FOsjAbl/w==",
       "type": "package",
-      "path": "mahapps.metro/2.4.9",
+      "path": "mahapps.metro/2.4.10",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -1181,7 +1181,7 @@
         "lib/netcoreapp3.1/MahApps.Metro.pdb",
         "lib/netcoreapp3.1/MahApps.Metro.xml",
         "lib/netcoreapp3.1/de/MahApps.Metro.resources.dll",
-        "mahapps.metro.2.4.9.nupkg.sha512",
+        "mahapps.metro.2.4.10.nupkg.sha512",
         "mahapps.metro.logo.png",
         "mahapps.metro.nuspec",
         "tools/VisualStudioToolsManifest.xml"
@@ -3314,7 +3314,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0-windows7.0": [
-      "MahApps.Metro >= 2.4.9",
+      "MahApps.Metro >= 2.4.10",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.8"
     ]
   },
@@ -3365,7 +3365,7 @@
         "dependencies": {
           "MahApps.Metro": {
             "target": "Package",
-            "version": "[2.4.9, )"
+            "version": "[2.4.10, )"
           },
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
@@ -3391,7 +3391,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
