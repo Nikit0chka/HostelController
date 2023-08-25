@@ -1,15 +1,17 @@
-﻿using System.Windows.Controls;
+﻿using HostelController.DataBaseModels;
+using System.Windows.Controls;
 
-namespace HostelController.Pages
+namespace HostelController.Pages;
+
+public partial class HistoryPage : Page
 {
-    /// <summary>
-    /// Логика взаимодействия для HistoryPage.xaml
-    /// </summary>
-    public partial class HistoryPage : Page
+    public HistoryPage()
     {
-        public HistoryPage()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+
+        InitializeDataGridContent();
     }
+
+    public void InitializeDataGridContent() => ClientsHistoryDataGrid.ItemsSource = DataBaseController.GetClientsHistories();
+
 }

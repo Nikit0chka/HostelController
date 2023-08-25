@@ -6,17 +6,15 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace HostelController;
+namespace HostelController.Pages;
 
 public partial class RegistratePage : Page
 {
     private readonly Room _chosedRoom;
     private readonly Bed _chosedBed;
-    private readonly DataBaseContext _dbContext;
 
     public RegistratePage(int bedId)
     {
-        _dbContext = new DataBaseContext();
         _chosedBed = DataBaseController.GetBedById(bedId);
         _chosedRoom = DataBaseController.GetRoomById(_chosedBed.RoomId);
 
@@ -27,51 +25,40 @@ public partial class RegistratePage : Page
     }
 
     #region Events
-    private void RegistratePage_Initialized(object? sender, EventArgs e)
-    {
-        ClearControls();
-    }
+    private void RegistratePage_Initialized(object? sender, EventArgs e) => SetControlsByRoomBedData();
 
-    private void AddButt_Click(object sender, RoutedEventArgs e)
-    {
-        AddClient();
-    }
+    private void AddButt_Click(object sender, RoutedEventArgs e) => AddClient();
 
-    private void RoomCmbBx_LostFocus(object sender, RoutedEventArgs e)
-    {
-        InitializeBedCmbBxOnChoosingRoom();
-    }
+    private void RoomCmbBx_LostFocus(object sender, RoutedEventArgs e) => InitializeBedCmbBx();
     #endregion
 
     #region Logic
-    private void InitializeBedCmbBxOnChoosingRoom()
+    private void InitializeBedCmbBx()
     {
-        BedCmbBx.ItemsSource = DataBaseController.GetBedsListByRoomId(RoomCmbBx\
-            );
-            _dbContext.Beds.Select(c => c).Where(c => c.RoomId.ToString() == RoomCmbBx.Text && !c.IsOccupied).ToList();
+        BedCmbBx.ItemsSource = DataBaseController.GetBedsListByRoomId(Convert.ToInt32(RoomCmbBx.Text)).Where(c => !c.IsOccupied).ToList();
         BedCmbBx.DisplayMemberPath = "Number";
     }
 
     private void InitializeRoomsCmbBx()
     {
-        RoomCmbBx.ItemsSource = _dbContext.Rooms.ToList();
+        RoomCmbBx.ItemsSource = DataBaseController.GetRoomsList();
         RoomCmbBx.DisplayMemberPath = "Id";
     }
 
     private void AddClient()
     {
         if (App.GetValidationErrors(this).Length > 0)
+        {
             App.ShowMessageBox("", "Проверьте введенные данные!");
+        }
         else
         {
-            DataBaseController.AddClient(NameTxtBx.Text, SurnameTxtBx.Text, (BedCmbBx.SelectedItem as Bed).Id,
+            DataBaseController.AddClient(NameTxtBx.Text, SurnameTxtBx.Text, ((Bed) BedCmbBx.SelectedItem).Id,
                 new DateTime(DateOfEnty.SelectedDate.Value.Ticks + TimeOfEntry.SelectedDateTime.Value.TimeOfDay.Ticks),
                 new DateTime(DateOfEnty.SelectedDate.Value.Ticks + TimeOfEntry.SelectedDateTime.Value.TimeOfDay.Ticks).AddHours((double) ValueOfDays.Value * 12));
 
             ClearControls();
         }
-
-        NavigationService.Navigate(new BedAdministrationPage(_chosedBed.Id));
     }
 
     private void ClearControls()
@@ -80,9 +67,24 @@ public partial class RegistratePage : Page
         SurnameTxtBx.Text = null;
 
         InitializeRoomsCmbBx();
-        RoomCmbBx.SelectedItem = _chosedRoom;
-        InitializeBedCmbBxOnChoosingRoom();
-        BedCmbBx.SelectedItem = _chosedBed;
+        RoomCmbBx.Text = null;
+        InitializeBedCmbBx();
+        BedCmbBx.Text = null;
+
+        DateOfEnty.SelectedDate = DateTime.Now;
+        TimeOfEntry.SelectedDateTime = DateTime.Now;
+        ValueOfDays.Value = null;
+    }
+
+    private void SetControlsByRoomBedData()
+    {
+        NameTxtBx.Text = null;
+        SurnameTxtBx.Text = null;
+
+        InitializeRoomsCmbBx();
+        RoomCmbBx.Text = _chosedRoom.Id.ToString();
+        InitializeBedCmbBx();
+        BedCmbBx.Text = _chosedBed.Number.ToString();
 
         DateOfEnty.SelectedDate = DateTime.Now;
         TimeOfEntry.SelectedDateTime = DateTime.Now;

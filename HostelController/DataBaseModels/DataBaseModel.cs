@@ -28,3 +28,14 @@ public class Bed
     public Room Room { get; set; }
     public bool IsOccupied { get; set; }
 }
+
+public class ClientsHistory
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Surname { get; set; }
+    public int BedId { get; set; }
+    public Bed Bed { get; set; }
+    public DateTime DateOfEntry { get; set; }
+    public DateTime DateOfLeave { get; set; }
+}

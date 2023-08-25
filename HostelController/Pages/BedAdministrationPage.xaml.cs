@@ -1,13 +1,17 @@
 ﻿using HostelController.DataBaseModels;
+using MahApps.Metro.Controls;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace HostelController;
+namespace HostelController.Pages;
 
 public partial class BedAdministrationPage : Page
 {
     private readonly Bed _chosedBed;
-    private readonly Client? _chosedBedClient;
+    private readonly Client _chosedBedClient;
 
     public BedAdministrationPage(int bedId)
     {
@@ -18,27 +22,46 @@ public partial class BedAdministrationPage : Page
         InitializeContent();
     }
 
+    #region Events
+    private void BedAdministrationPage_Loaded(object sender, RoutedEventArgs e) => CalculateRemainingTimeOfStayAsync();
+
+    private void EvictClient(object sender, RoutedEventArgs e)
+    {
+        DataBaseController.RemoveClientById(_chosedBedClient.Id);
+
+        NavigationService.GoBack();
+    }
+
+    private void OpenRegistratePage(object sender, RoutedEventArgs e) => NavigationService.Navigate(new RegistratePage(_chosedBed.Id));
+    #endregion
+
+    #region Logic
     private void InitializeContent()
     {
         RoomNumber.Text = $"Комната {_chosedBed.RoomId}";
         BedNumber.Text = $"Кровать {_chosedBed.Number}";
 
-        if (_chosedBed.IsOccupied)
+        if (_chosedBedClient is not null)
         {
             InitializeBedInfo();
             InitializeEvictClientButt();
+            CalculateRemainingTimeOfStayAsync();
         }
         else
+        {
             InitializeAddClientButt();
+        }
     }
 
     private void InitializeBedInfo()
     {
         BedStatucTxtBlc.Text = "Занята";
-        TimeOfEntry.Text = _chosedBedClient.CheckInDate.TimeOfDay.ToString();
-        DateOfEnty.Text = _chosedBedClient.CheckInDate.Date.ToString();
-        TimeOfLeave.Text = _chosedBedClient.CheckOutDate.TimeOfDay.ToString();
-        DateOfLeave.Text = _chosedBedClient.CheckOutDate.Date.ToString();
+        ClientName.Text = $"Имя : {_chosedBedClient.Name}";
+        ClientSurname.Text = $"Фамилия: {_chosedBedClient.Surname}";
+        TimeOfEntry.Text = $"Время заезда : {_chosedBedClient.CheckInDate:t}";
+        DateOfEnty.Text = $"Дата заезда : {_chosedBedClient.CheckInDate:d}";
+        TimeOfLeave.Text = $"Время выезда : {_chosedBedClient.CheckOutDate:t}";
+        DateOfLeave.Text = $"Дата выезда : {_chosedBedClient.CheckOutDate:d}";
     }
 
     private void InitializeAddClientButt()
@@ -73,15 +96,25 @@ public partial class BedAdministrationPage : Page
         ButtonStckPan.Children.Add(EvictClientButt);
     }
 
-    private void EvictClient(object sender, RoutedEventArgs e)
+    private async void CalculateRemainingTimeOfStayAsync()
     {
-        DataBaseController.RemoveClientById(_chosedBedClient.Id);
+        MainWindow currentWindow = Application.Current.Windows.OfType<MetroWindow>().SingleOrDefault(x => x.IsActive) as MainWindow;
+        Page currentPage = currentWindow.GetActivePage();
 
-        NavigationService.Navigate(new CurrentRoomStatus());
-    }
+        while (currentPage.GetType() == GetType() || currentPage.GetType() == new CurrentRoomInfoPage(_chosedBed.RoomId).GetType())
+        {
+            TimeSpan remainingTime = _chosedBedClient.CheckOutDate.TimeOfDay - DateTime.Now.TimeOfDay;
+            RemainingTimeOfStay.Text = $"Оставшееся время : " + remainingTime.ToString(@"hh\:mm\:ss");
 
-    private void OpenRegistratePage(object sender, RoutedEventArgs e)
-    {
-        NavigationService.Navigate(new RegistratePage(_chosedBed.Id));
+            if (_chosedBedClient.CheckOutDate < DateTime.Now)
+            {
+                RemainingTimeOfStay.Text = "Время проживания клиента истекло!";
+                break;
+            }
+
+            currentPage = currentWindow.GetActivePage();
+            await Task.Delay(1000);
+        }
     }
+    #endregion
 }

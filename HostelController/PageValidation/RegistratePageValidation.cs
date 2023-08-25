@@ -64,12 +64,10 @@ internal class RegistratePageValidation : IDataErrorInfo
                         errorInfo = "Число дней должно быть заполнено!";
                     break;
             }
+
             return errorInfo;
         }
     }
 
-    public string Error
-    {
-        get { return "Общая ошибка модели данных"; }
-    }
+    public string Error => "Общая ошибка модели данных";
 }
