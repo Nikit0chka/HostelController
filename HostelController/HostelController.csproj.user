@@ -22,9 +22,12 @@
     <Compile Update="Pages\CurrentRoomInfoPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Windows\ExtendClientStayWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="MainWindow.xaml">
+    <Page Update="Windows\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\AllRoomsInfoPage.xaml">
@@ -40,6 +43,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\CurrentRoomInfoPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\ExtendClientStayWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

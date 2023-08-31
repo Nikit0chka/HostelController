@@ -24,6 +24,14 @@ public partial class RegistratePage : Page
         InitializeComponent();
     }
 
+    public RegistratePage()
+    {
+        DataContext = new RegistratePageValidation();
+
+        InitializeComponent();
+        ClearControls();
+    }
+
     #region Events
     private void RegistratePage_Initialized(object? sender, EventArgs e) => SetControlsByRoomBedData();
 
@@ -54,8 +62,9 @@ public partial class RegistratePage : Page
         else
         {
             DataBaseController.AddClient(NameTxtBx.Text, SurnameTxtBx.Text, ((Bed) BedCmbBx.SelectedItem).Id,
-                new DateTime(DateOfEnty.SelectedDate.Value.Ticks + TimeOfEntry.SelectedDateTime.Value.TimeOfDay.Ticks),
-                new DateTime(DateOfEnty.SelectedDate.Value.Ticks + TimeOfEntry.SelectedDateTime.Value.TimeOfDay.Ticks).AddHours((double) ValueOfDays.Value * 12));
+                DateTime.Now, DateTime.Now.AddDays((double) ValueOfDays.Value));
+
+            App.ShowMessageBox("", "Гость добавлен!");
 
             ClearControls();
         }
@@ -71,8 +80,6 @@ public partial class RegistratePage : Page
         InitializeBedCmbBx();
         BedCmbBx.Text = null;
 
-        DateOfEnty.SelectedDate = DateTime.Now;
-        TimeOfEntry.SelectedDateTime = DateTime.Now;
         ValueOfDays.Value = null;
     }
 
@@ -86,8 +93,6 @@ public partial class RegistratePage : Page
         InitializeBedCmbBx();
         BedCmbBx.Text = _chosedBed.Number.ToString();
 
-        DateOfEnty.SelectedDate = DateTime.Now;
-        TimeOfEntry.SelectedDateTime = DateTime.Now;
         ValueOfDays.Value = null;
     }
     #endregion

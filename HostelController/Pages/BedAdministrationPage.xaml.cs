@@ -1,4 +1,5 @@
 ﻿using HostelController.DataBaseModels;
+using HostelController.Windows;
 using MahApps.Metro.Controls;
 using System;
 using System.Linq;
@@ -29,15 +30,26 @@ public partial class BedAdministrationPage : Page
     {
         DataBaseController.RemoveClientById(_chosedBedClient.Id);
 
+        App.ShowMessageBox("", "Гость выселен успешно!");
+
         NavigationService.GoBack();
     }
 
     private void OpenRegistratePage(object sender, RoutedEventArgs e) => NavigationService.Navigate(new RegistratePage(_chosedBed.Id));
+
+    private void OpenExtendClientStayWindow(object sender, RoutedEventArgs e)
+    {
+        ExtendClientStayWindow extendClientStayWindow = new(_chosedBedClient.Id);
+        extendClientStayWindow.Show();
+
+        extendClientStayWindow.Closed += (sender, args) => InitializeContent();
+    }
     #endregion
 
     #region Logic
     private void InitializeContent()
     {
+        ButtonStckPan.Children.Clear();
         RoomNumber.Text = $"Комната {_chosedBed.RoomId}";
         BedNumber.Text = $"Кровать {_chosedBed.Number}";
 
@@ -46,6 +58,7 @@ public partial class BedAdministrationPage : Page
             InitializeBedInfo();
             InitializeEvictClientButt();
             CalculateRemainingTimeOfStayAsync();
+            InitializeExtendClientStayButt();
         }
         else
         {
@@ -70,8 +83,8 @@ public partial class BedAdministrationPage : Page
         {
             Content = "Добавить гостя",
             Style = (Style) Application.Current.Resources["MahApps.Styles.Button.Square.Accent"],
-            Height = 85,
-            Width = 150,
+            Height = 70,
+            Width = 140,
             FontSize = 16,
             BorderThickness = new Thickness(0)
         };
@@ -86,14 +99,32 @@ public partial class BedAdministrationPage : Page
         {
             Content = "Выселить гостя",
             Style = (Style) Application.Current.Resources["MahApps.Styles.Button.Square.Accent"],
-            Height = 85,
-            Width = 150,
+            Height = 70,
+            Width = 140,
             FontSize = 16,
-            BorderThickness = new Thickness(0)
+            BorderThickness = new Thickness(0),
+            Margin = new Thickness(10)
         };
         EvictClientButt.Click += new RoutedEventHandler(EvictClient);
 
         ButtonStckPan.Children.Add(EvictClientButt);
+    }
+
+    private void InitializeExtendClientStayButt()
+    {
+        Button ExtendClientStayButt = new()
+        {
+            Content = "Продлить",
+            Style = (Style) Application.Current.Resources["MahApps.Styles.Button.Square.Accent"],
+            Height = 70,
+            Width = 140,
+            FontSize = 16,
+            BorderThickness = new Thickness(0),
+            Margin = new Thickness(10)
+        };
+        ExtendClientStayButt.Click += new RoutedEventHandler(OpenExtendClientStayWindow);
+
+        ButtonStckPan.Children.Add(ExtendClientStayButt);
     }
 
     private async void CalculateRemainingTimeOfStayAsync()
@@ -103,8 +134,10 @@ public partial class BedAdministrationPage : Page
 
         while (currentPage.GetType() == GetType() || currentPage.GetType() == new CurrentRoomInfoPage(_chosedBed.RoomId).GetType())
         {
-            TimeSpan remainingTime = _chosedBedClient.CheckOutDate.TimeOfDay - DateTime.Now.TimeOfDay;
-            RemainingTimeOfStay.Text = $"Оставшееся время : " + remainingTime.ToString(@"hh\:mm\:ss");
+            TimeSpan remainingTime = _chosedBedClient.CheckOutDate - DateTime.Now;
+            int remainingDays = remainingTime.Days;
+
+            RemainingTimeOfStay.Text = $"Оставшееся время : {remainingDays} дней  {remainingTime:hh\\:mm\\:ss} часов";
 
             if (_chosedBedClient.CheckOutDate < DateTime.Now)
             {

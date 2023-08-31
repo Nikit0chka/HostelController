@@ -53,21 +53,11 @@ internal class DataBaseContext : DbContext
         Bed bed31 = new() { Id = 31, Number = 3, RoomId = 8 };
         Bed bed32 = new() { Id = 32, Number = 4, RoomId = 8 };
 
-        Bed bed33 = new() { Id = 33, Number = 1, RoomId = 9 };
-        Bed bed34 = new() { Id = 34, Number = 2, RoomId = 9 };
-        Bed bed35 = new() { Id = 35, Number = 3, RoomId = 9 };
-        Bed bed36 = new() { Id = 36, Number = 4, RoomId = 9 };
-
-        Bed bed37 = new() { Id = 37, Number = 1, RoomId = 10 };
-        Bed bed38 = new() { Id = 38, Number = 2, RoomId = 10 };
-        Bed bed39 = new() { Id = 39, Number = 3, RoomId = 10 };
-        Bed bed40 = new() { Id = 40, Number = 4, RoomId = 10 };
-
         modelBuilder.Entity<Bed>().HasData(
             bed1, bed2, bed3, bed4, bed5, bed6, bed7, bed8, bed9, bed10,
             bed11, bed12, bed13, bed14, bed15, bed16, bed17, bed18, bed19,
             bed20, bed21, bed22, bed23, bed24, bed25, bed26, bed27, bed28, bed29,
-            bed30, bed31, bed32, bed33, bed34, bed35, bed36, bed37, bed38, bed39, bed40);
+            bed30, bed31, bed32);
 
         modelBuilder.Entity<Room>().HasData(
             new Room { Id = 1 },
@@ -77,9 +67,7 @@ internal class DataBaseContext : DbContext
             new Room { Id = 5 },
             new Room { Id = 6 },
             new Room { Id = 7 },
-            new Room { Id = 8 },
-            new Room { Id = 9 },
-            new Room { Id = 10 });
+            new Room { Id = 8 });
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=HostelController;Trusted_Connection=True;");

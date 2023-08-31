@@ -7,7 +7,6 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Threading;
 
 namespace HostelController;
 
@@ -65,18 +64,5 @@ public partial class App : Application
         }
 
         return new TextBlock();
-    }
-
-    private void StartTimer()
-    {
-        DispatcherTimer _timer = new();
-        _timer.Tick += (sender, e) => CheckBedsStatus();
-        _timer.Interval = TimeSpan.FromMinutes(1);
-        _timer.Start();
-    }
-
-    private void CheckBedsStatus()
-    {
-
     }
 }

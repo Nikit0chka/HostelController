@@ -5,20 +5,44 @@
       Height="650" Width="750"
       Background="White">
 
+    <Page.Resources>
+        <Style TargetType="{x:Type DataGridCell}" x:Key="FirstColumnStyle">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="IsEditing" Value="True"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter Property="IsEditing" Value="False"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type DataGridCell}">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+    </Page.Resources>
+
     <Grid>
-        <DataGrid Name="ClientsHistoryDataGrid"
-             AutoGenerateColumns="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="523"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <DataGrid Name="ClientsHistoryDataGrid" Grid.Row="0" AutoGenerateColumns="False" Width="auto" HorizontalAlignment="Center">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn ElementStyle="{DynamicResource MetroDataGridCheckBox}"
-                                        EditingElementStyle="{DynamicResource MetroDataGridCheckBox}"
-                                        Header="IsSelected"
-                                        />
-                <DataGridTextColumn Header="Имя" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}" />
-                <DataGridTextColumn Header="Номер кровати" Binding="{Binding BedId}" />
-                <DataGridTextColumn Header="Дата въезда" Binding="{Binding DateOfEntry}" />
-                <DataGridTextColumn Header="Дата выезда" Binding="{Binding DateOfLeave}" />
+                                    EditingElementStyle="{DynamicResource MetroDataGridCheckBox}"
+                                    Header="Выбрать" CellStyle="{StaticResource FirstColumnStyle}"/>
+
+                <DataGridTextColumn Header="Имя" Binding="{Binding Name}" IsReadOnly="True" Selector.IsSelected="False"/>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}" IsReadOnly="True" Selector.IsSelected="False"/>
+                <DataGridTextColumn Header="Номер кровати" Binding="{Binding BedId}" IsReadOnly="True" Selector.IsSelected="False"/>
+                <DataGridTextColumn Header="Дата въезда" Binding="{Binding DateOfEntry, StringFormat='dd.MM.yyyy HH:mm:ss'}" IsReadOnly="True" Selector.IsSelected="False"/>
+                <DataGridTextColumn Header="Дата выезда" Binding="{Binding DateOfLeave,StringFormat='dd.MM.yyyy HH:mm:ss'}" IsReadOnly="True" Selector.IsSelected="False"/>
             </DataGrid.Columns>
         </DataGrid>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Name="DeleteHistoryButt" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Height="50" Width="100" Content="Удалить" FontSize="16" Click="DeleteHistoryButt_Click" BorderThickness="0"/>
+        </StackPanel>
     </Grid>
 </Page>

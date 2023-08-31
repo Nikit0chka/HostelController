@@ -1,0 +1,17 @@
+﻿<Controls:MetroWindow 
+    x:Class="HostelController.Windows.ExtendClientStayWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+    Height="300" Width="300" 
+    GlowBrush="{DynamicResource MahApps.Brushes.Accent}"
+    WindowStartupLocation="CenterScreen"
+    BorderThickness="2"
+    ResizeMode = "NoResize"
+    Topmost="True">
+
+    <Grid>
+        <Controls:NumericUpDown Name="ValueOfDays" HorizontalAlignment="Center" VerticalAlignment="Center" Controls:TextBoxHelper.Watermark="Число суток" FontSize="16" Height="30" Width="150" Controls:TextBoxHelper.WatermarkAlignment="Left" Minimum="1"/>
+        <Button Name="AcceptButton" Style="{StaticResource MahApps.Styles.Button.Square.Accent}" Content="Подтвердить" Width="100" Height="50" Margin="0 200 0 0" BorderThickness="0" Click="AcceptButton_Click"/>
+    </Grid>
+</Controls:MetroWindow>

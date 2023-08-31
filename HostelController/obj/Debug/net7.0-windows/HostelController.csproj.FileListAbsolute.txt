@@ -71,3 +71,5 @@ C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelControlle
 C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\Pages\CurrentRoomInfoPage.baml
 C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\Pages\AllRoomsInfoPage.g.cs
 C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\Pages\CurrentRoomInfoPage.g.cs
+C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\Windows\ExtendClientStayWindow.baml
+C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\Windows\ExtendClientStayWindow.g.cs

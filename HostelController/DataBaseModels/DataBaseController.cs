@@ -25,13 +25,25 @@ internal class DataBaseController
 
             _dbContext.Clients.Add(newCLient);
             _dbContext.SaveChanges();
-            App.ShowMessageBox("", "Гость добавлен!");
 
             UpdateBedStatus(bedId, true);
         }
         catch (Exception ex)
         {
             App.ShowMessageBox("Exception!", ex.Message);
+        }
+    }
+
+    public static void UpdateClientStay(int clientId, DateTime newCheckOutDate)
+    {
+        try
+        {
+            _dbContext.Clients.FirstOrDefault(c => c.Id == clientId).CheckOutDate = newCheckOutDate;
+            _dbContext.SaveChanges();
+        }
+        catch (Exception ex)
+        {
+            App.ShowMessageBox("Exeption!", ex.Message);
         }
     }
 
@@ -43,7 +55,7 @@ internal class DataBaseController
         }
         catch (Exception ex)
         {
-            App.ShowMessageBox("", ex.Message);
+            App.ShowMessageBox("Exception!", ex.Message);
             return null;
         }
     }
@@ -56,7 +68,20 @@ internal class DataBaseController
         }
         catch (Exception ex)
         {
-            App.ShowMessageBox("", ex.Message);
+            App.ShowMessageBox("Exception!", ex.Message);
+            return null;
+        }
+    }
+
+    public static Client GetCLientById(int clientId)
+    {
+        try
+        {
+            return _dbContext.Clients.Where(c => c.Id == clientId).FirstOrDefault();
+        }
+        catch (Exception ex)
+        {
+            App.ShowMessageBox("Exception!", ex.Message);
             return null;
         }
     }
@@ -71,12 +96,11 @@ internal class DataBaseController
             _dbContext.Clients.Remove(removedClient);
             AddClientToHistory(removedClient);
 
-            App.ShowMessageBox("", "Гость выселен!");
             _dbContext.SaveChanges();
         }
         catch (Exception ex)
         {
-            App.ShowMessageBox("", ex.Message);
+            App.ShowMessageBox("Exception!", ex.Message);
         }
     }
     #endregion
@@ -90,7 +114,7 @@ internal class DataBaseController
         }
         catch (Exception ex)
         {
-            App.ShowMessageBox("", ex.Message);
+            App.ShowMessageBox("Exception!", ex.Message);
         }
 
         _dbContext.SaveChanges();
@@ -104,7 +128,7 @@ internal class DataBaseController
         }
         catch (Exception ex)
         {
-            App.ShowMessageBox("", ex.Message);
+            App.ShowMessageBox("Exception!", ex.Message);
             return null;
         }
     }
@@ -117,7 +141,7 @@ internal class DataBaseController
         }
         catch (Exception ex)
         {
-            App.ShowMessageBox("", ex.Message);
+            App.ShowMessageBox("Exception!", ex.Message);
             return null;
         }
     }
@@ -131,7 +155,7 @@ internal class DataBaseController
         }
         catch (Exception ex)
         {
-            App.ShowMessageBox("", ex.Message);
+            App.ShowMessageBox("Exception!", ex.Message);
             return null;
         }
     }
@@ -144,7 +168,7 @@ internal class DataBaseController
         }
         catch (Exception ex)
         {
-            App.ShowMessageBox("", ex.Message);
+            App.ShowMessageBox("Exception!", ex.Message);
             return 0;
         }
     }
@@ -157,7 +181,7 @@ internal class DataBaseController
         }
         catch (Exception ex)
         {
-            App.ShowMessageBox("", ex.Message);
+            App.ShowMessageBox("Exception!", ex.Message);
             return null;
         }
     }
@@ -172,7 +196,7 @@ internal class DataBaseController
         }
         catch (Exception ex)
         {
-            App.ShowMessageBox("", ex.Message);
+            App.ShowMessageBox("Exception!", ex.Message);
         }
     }
 
@@ -184,8 +208,21 @@ internal class DataBaseController
         }
         catch (Exception ex)
         {
-            App.ShowMessageBox("", ex.Message);
+            App.ShowMessageBox("Exception!", ex.Message);
             return null;
+        }
+    }
+
+    public static void DeleteClientHistory(ClientsHistory clientHistory)
+    {
+        try
+        {
+            _dbContext.ClientsHistory.Remove(clientHistory);
+            _dbContext.SaveChanges();
+        }
+        catch (Exception ex)
+        {
+            App.ShowMessageBox("Exception!", ex.Message);
         }
     }
     #endregion

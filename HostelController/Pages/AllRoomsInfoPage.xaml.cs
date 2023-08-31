@@ -46,8 +46,8 @@ public partial class AllRoomsInfoPage : Page
         {
             StackPanel buttonContent = new();
 
-            TextBlock roomNumber = new() { Text = $"Комната {room.Id}", HorizontalAlignment = HorizontalAlignment.Center };
-            TextBlock roomFreeBedsCount = new() { Text = $"Свободно {DataBaseController.GetRoomFreeBedsCount(room.Id)}", HorizontalAlignment = HorizontalAlignment.Center };
+            TextBlock roomNumber = new() { Text = $"комната {room.Id}", HorizontalAlignment = HorizontalAlignment.Center };
+            TextBlock roomFreeBedsCount = new() { Text = $"свободно {DataBaseController.GetRoomFreeBedsCount(room.Id)}", HorizontalAlignment = HorizontalAlignment.Center };
             TextBlock roomStatus = App.GetBedStatusTextBlockByRoomId(room.Id);
 
             roomStatus.HorizontalAlignment = HorizontalAlignment.Center;
