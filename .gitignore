@@ -1,0 +1,155 @@
+# Игнорировать временные файлы Visual Studio, результаты сборки и файлы, созданные популярными дополнениями Visual Studio.
+# Файлы, специфичные для пользователя
+*.suo
+*.user
+*.sln.docstates
+
+# Результаты сборки
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# Каталоги кэша Roslyn
+*.ide/
+
+# Результаты тестирования MSTest
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# NUNIT
+*.VisualState.xml
+TestResult.xml
+
+# Результаты сборки проекта ATL
+[Dd]ebugPS/
+[Rr]eleasePS/
+dlldata.c
+
+*_i.c
+*_p.c
+*_i.h
+*.ilk
+*.meta
+*.obj
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+
+# Файлы тестирования Chutzpah Test 
+_Chutzpah*
+
+# Кэш-файлы Visual C++
+ipch/
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+
+# Профилировщик Visual Studio 
+*.psess 
+*.vsp 
+*.vspx 
+
+# Локальное рабочее пространство TFS 2012 
+$tf/ 
+
+# Guidance Automation Toolkit 
+*.gpState 
+
+# ReSharper - дополнение для .NET-кодирования 
+_ReSharper*/
+*.[Rr]e[Ss]harper 
+*.DotSettings.user 
+
+# JustCode - дополнение для .NET-кодирования 
+.JustCode 
+
+# TeamCity - дополнение для сборки 
+_TeamCity* 
+
+# DotCover - инструмент покрытия кода 
+*.dotCover 
+
+# NCrunch 
+_NCrunch_* 
+.*crunch*.local.xml 
+
+# MightyMoose 
+*.mm.* 
+AutoTest.Net/ 
+
+# Web workbench (sass) 
+.sass-cache/ 
+
+# Каталог вывода Installshield 
+[Ee]xpress/ 
+
+# DocProject - генератор документации 
+DocProject/buildhelp/ 
+DocProject/Help/*.HxT 
+DocProject/Help/*.HxC 
+DocProject/Help/*.hhc 
+DocProject/Help/*.hhk 
+DocProject/Help/*.hhp 
+DocProject/Help/Html2 
+DocProject/Help/html 
+
+# Каталог Click-Once directory  
+publish/ 
+
+# Каталог вывода веб-приложения *. [Pp]ublish.xml  
+*.azurePubxml  
+## TODO: Раскомментируйте следующую строку, если вы хотите проверить ваши  
+## настройки развертывания веб-приложения, но имейте в виду, что это будет включать незашифрованные  
+## пароли  
+## *.pubxml  
+
+# Каталог пакетов NuGet  
+packages/*  
+## TODO: Если инструмент, который вы используете, требует repositories.config  
+## раскомментируйте следующую строку  
+#!packages/repositories.config  
+
+# Включить папку «build /» в папке NuGet Packages, поскольку # пакеты NuGet используют ее для целей MSBuild.  
+# Эта строка должна быть после игнорирования папки build  
+# (и папки packages, если вышеупомянутая строка была раскомментирована)  
+!packages/build/  
+
+# Вывод сборки Windows Azure  
+csx/  
+*.build.csdef  
+
+# Каталог пакетов Windows Store app  
+AppPackages/  
+
+# Другие файлы и каталоги  
+sql/  
+.Cache  
+ClientBin/  
+[Ss]tyle[Cc]op.*  
+~$*  
+*~  
+*.dbmdl  
+*.dbproj.schemaview  
+*.pfx  
+*.publish
