@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,7 +13,7 @@ namespace HostelController.Pages;
 
 public partial class CurrentRoomInfoPage : Page
 {
-    private readonly List<Bed> _beds;
+    private readonly List<Bed>? _beds;
     private readonly List<Button> _bedButtons;
 
     public CurrentRoomInfoPage(int roomId)
@@ -37,52 +38,61 @@ public partial class CurrentRoomInfoPage : Page
 
     private void OpenBedAdministrationPage(object sender, RoutedEventArgs e)
     {
-        int bedId = _beds.Where(c => c.Id == Convert.ToInt32(((Button) sender).Tag)).First().Id;
+        if (_beds is not null)
+        {
+            int bedId = _beds.Where(c => c.Id == Convert.ToInt32(((Button) sender).Tag)).First().Id;
 
-        NavigationService.Navigate(new BedAdministrationPage(bedId));
+            NavigationService.Navigate(new BedAdministrationPage(bedId));
+        }
     }
     #endregion
     #region Logic
     private void InitializeBeds()
     {
-        foreach (Bed bed in _beds)
+        if (_beds is not null)
         {
-            Button bedButton = new()
+            foreach (Bed bed in _beds)
             {
-                Name = "Bed" + bed.Number.ToString(),
-                Content = "Кровать " + bed.Number.ToString(),
-                Style = (Style) Application.Current.Resources["MahApps.Styles.Button.Square"],
-                Height = 80,
-                Width = 150,
-                FontSize = 16,
-                BorderThickness = new Thickness(3),
-                Tag = bed.Id
-            };
-            bedButton.Click += new RoutedEventHandler(OpenBedAdministrationPage);
+                Button bedButton = new()
+                {
+                    Name = "Bed" + bed.Number.ToString(),
+                    Content = "Кровать " + bed.Number.ToString(),
+                    Style = (Style) Application.Current.Resources["MahApps.Styles.Button.Square"],
+                    Height = 80,
+                    Width = 150,
+                    FontSize = 16,
+                    BorderThickness = new Thickness(3),
+                    Tag = bed.Id
+                };
+                bedButton.Click += new RoutedEventHandler(OpenBedAdministrationPage);
 
-            BedsButtUnGrid.Children.Add(bedButton);
-            _bedButtons.Add(bedButton);
+                BedsButtUnGrid.Children.Add(bedButton);
+                _bedButtons.Add(bedButton);
+            }
         }
     }
 
     private void CheckBedStatus()
     {
-        foreach (Bed bed in _beds)
+        if (_beds is not null)
         {
-            Client client = DataBaseController.GetClientByBedId(bed.Id);
+            foreach (Bed bed in _beds)
+            {
+                CurrentClient? client = DataBaseController.GetClientByBedId(bed.Id);
 
-            if (client is not null)
-            {
-                if (client.CheckOutDate < DateTime.Now || client.CheckOutDate < DateTime.Now.Subtract(TimeSpan.FromHours(1)))
-                    ColorBed(bed.Id, Brushes.Red);
-                else if (client.CheckOutDate < DateTime.Now.Subtract(TimeSpan.FromHours(2)))
-                    ColorBed(bed.Id, Brushes.Yellow);
+                if (client is not null)
+                {
+                    if (client.CheckOutDate < DateTime.Now || client.CheckOutDate < DateTime.Now.Subtract(TimeSpan.FromHours(1)))
+                        ColorBed(bed.Id, Brushes.Red);
+                    else if (client.CheckOutDate < DateTime.Now.Subtract(TimeSpan.FromHours(2)))
+                        ColorBed(bed.Id, Brushes.Yellow);
+                    else
+                        ColorBed(bed.Id, Brushes.Gray);
+                }
                 else
-                    ColorBed(bed.Id, Brushes.Gray);
-            }
-            else
-            {
-                ColorBed(bed.Id, Brushes.White);
+                {
+                    ColorBed(bed.Id, Brushes.White);
+                }
             }
         }
     }

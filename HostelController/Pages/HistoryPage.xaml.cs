@@ -35,7 +35,11 @@ public partial class HistoryPage : Page
             }
         }
 
-        selectedItems.ForEach(c => DataBaseController.DeleteClientHistory(c as ClientsHistory));
+        selectedItems.ForEach(c =>
+        {
+            if (c is ClientsHistory clientsHistory)
+                DataBaseController.DeleteClientHistory(clientsHistory);
+        });
 
         if (selectedItems.Count > 0)
             App.ShowMessageBox("", "История удалена успешно!");

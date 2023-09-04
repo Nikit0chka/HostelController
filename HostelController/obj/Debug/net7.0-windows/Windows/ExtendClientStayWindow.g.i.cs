@@ -80,7 +80,7 @@ namespace HostelController.Windows {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/HostelController;V1.0.0.0;component/windows/extendclientstaywindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/HostelController;component/windows/extendclientstaywindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Windows\ExtendClientStayWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

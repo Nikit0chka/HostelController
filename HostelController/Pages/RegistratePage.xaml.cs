@@ -10,13 +10,15 @@ namespace HostelController.Pages;
 
 public partial class RegistratePage : Page
 {
-    private readonly Room _chosedRoom;
-    private readonly Bed _chosedBed;
+    private readonly Room? _chosedRoom;
+    private readonly Bed? _chosedBed;
 
     public RegistratePage(int bedId)
     {
         _chosedBed = DataBaseController.GetBedById(bedId);
-        _chosedRoom = DataBaseController.GetRoomById(_chosedBed.RoomId);
+
+        if (_chosedBed is not null)
+            _chosedRoom = DataBaseController.GetRoomById(_chosedBed.RoomId);
 
         DataContext = new RegistratePageValidation();
 
@@ -43,7 +45,7 @@ public partial class RegistratePage : Page
     #region Logic
     private void InitializeBedCmbBx()
     {
-        BedCmbBx.ItemsSource = DataBaseController.GetBedsListByRoomId(Convert.ToInt32(RoomCmbBx.Text)).Where(c => !c.IsOccupied).ToList();
+        BedCmbBx.ItemsSource = DataBaseController.GetBedsListByRoomId(Convert.ToInt32(RoomCmbBx.Text))?.Where(c => !c.IsOccupied).ToList();
         BedCmbBx.DisplayMemberPath = "Number";
     }
 
@@ -89,9 +91,9 @@ public partial class RegistratePage : Page
         SurnameTxtBx.Text = null;
 
         InitializeRoomsCmbBx();
-        RoomCmbBx.Text = _chosedRoom.Id.ToString();
+        RoomCmbBx.Text = _chosedRoom?.Id.ToString();
         InitializeBedCmbBx();
-        BedCmbBx.Text = _chosedBed.Number.ToString();
+        BedCmbBx.Text = _chosedBed?.Number.ToString();
 
         ValueOfDays.Value = null;
     }

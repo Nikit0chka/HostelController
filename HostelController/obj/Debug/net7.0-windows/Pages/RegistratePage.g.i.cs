@@ -112,7 +112,7 @@ namespace HostelController.Pages {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/HostelController;V1.0.0.0;component/pages/registratepage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/HostelController;component/pages/registratepage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Pages\RegistratePage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

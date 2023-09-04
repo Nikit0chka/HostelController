@@ -1,12 +1,9 @@
-﻿using HostelController.DataBaseModels;
-using MahApps.Metro.Controls;
+﻿using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
-using System;
 using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace HostelController;
 
@@ -39,30 +36,7 @@ public partial class App : Application
 
     public static void ShowMessageBox(string title, string message)
     {
-        MetroWindow? currentWindow = Current.Windows.OfType<MetroWindow>().SingleOrDefault(x => x.IsActive);
-        if (currentWindow is null)
-            return;
-
+        MetroWindow currentWindow = Current.Windows.OfType<MainWindow>().Single(x => x.IsActive);
         currentWindow.ShowMessageAsync(title, message);
-    }
-
-    public static TextBlock GetBedStatusTextBlockByRoomId(int roomId)
-    {
-        foreach (Bed bed in DataBaseController.GetBedsListByRoomId(roomId))
-        {
-            Client client = DataBaseController.GetClientByBedId(bed.Id);
-
-            if (client is null)
-                continue;
-
-            TimeSpan remainigClientTime = client.CheckOutDate - DateTime.Now;
-
-            if (remainigClientTime < TimeSpan.FromMinutes(30))
-                return new TextBlock { Text = "!!", Foreground = Brushes.Red };
-            else if (remainigClientTime < TimeSpan.FromHours(1))
-                return new TextBlock { Text = "!", Foreground = Brushes.Yellow };
-        }
-
-        return new TextBlock();
     }
 }

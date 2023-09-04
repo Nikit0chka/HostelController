@@ -1,7 +1,9 @@
 ﻿using HostelController.DataBaseModels;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Navigation;
 using System.Windows.Threading;
 
@@ -42,13 +44,14 @@ public partial class AllRoomsInfoPage : Page
     private void InitializeRoomsButtons()
     {
         RoomButtUnifGrid.Children.Clear();
+
         foreach (Room room in DataBaseController.GetRoomsList())
         {
             StackPanel buttonContent = new();
 
             TextBlock roomNumber = new() { Text = $"комната {room.Id}", HorizontalAlignment = HorizontalAlignment.Center };
             TextBlock roomFreeBedsCount = new() { Text = $"свободно {DataBaseController.GetRoomFreeBedsCount(room.Id)}", HorizontalAlignment = HorizontalAlignment.Center };
-            TextBlock roomStatus = App.GetBedStatusTextBlockByRoomId(room.Id);
+            TextBlock roomStatus = GetBedStatusTextBlockByRoomId(room.Id);
 
             roomStatus.HorizontalAlignment = HorizontalAlignment.Center;
 
@@ -77,7 +80,32 @@ public partial class AllRoomsInfoPage : Page
 
     private void OpenRoomInfoPage(object sender, RoutedEventArgs e)
     {
-        NavigationService.Navigate(new CurrentRoomInfoPage(Convert.ToInt32((sender as Button).Tag)));
+        NavigationService.Navigate(new CurrentRoomInfoPage(Convert.ToInt32(((Button) sender).Tag)));
         _timer.Stop();
+    }
+
+    public static TextBlock GetBedStatusTextBlockByRoomId(int roomId)
+    {
+        List<Bed>? beds = DataBaseController.GetBedsListByRoomId(roomId);
+
+        if (beds is null)
+            return new TextBlock();
+
+        foreach (Bed bed in beds)
+        {
+            CurrentClient? client = DataBaseController.GetClientByBedId(bed.Id);
+
+            if (client is null)
+                continue;
+
+            TimeSpan remainigClientTime = client.CheckOutDate - DateTime.Now;
+
+            if (remainigClientTime < TimeSpan.FromMinutes(30))
+                return new TextBlock { Text = "!!", Foreground = Brushes.Red };
+            else if (remainigClientTime < TimeSpan.FromHours(1))
+                return new TextBlock { Text = "!", Foreground = Brushes.Yellow };
+        }
+
+        return new TextBlock();
     }
 }

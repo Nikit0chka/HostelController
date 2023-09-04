@@ -13,12 +13,12 @@ internal class DataBaseController
     {
         try
         {
-            Client newCLient = new()
+            CurrentClient newCLient = new()
             {
                 Name = name,
                 Surname = surname,
                 BedId = bedId,
-                ClientBed = _dbContext.Beds.First(c => c.Id == bedId),
+                Bed = _dbContext.Beds.First(c => c.Id == bedId),
                 CheckInDate = checkInDate,
                 CheckOutDate = checkOutDate,
             };
@@ -38,7 +38,10 @@ internal class DataBaseController
     {
         try
         {
-            _dbContext.Clients.FirstOrDefault(c => c.Id == clientId).CheckOutDate = newCheckOutDate;
+            CurrentClient? client = _dbContext.Clients.FirstOrDefault(c => c.Id == clientId);
+            if (client is not null)
+                client.CheckOutDate = newCheckOutDate;
+
             _dbContext.SaveChanges();
         }
         catch (Exception ex)
@@ -47,7 +50,7 @@ internal class DataBaseController
         }
     }
 
-    public static List<Client> GetClientsList()
+    public static List<CurrentClient> GetClientsList()
     {
         try
         {
@@ -56,11 +59,11 @@ internal class DataBaseController
         catch (Exception ex)
         {
             App.ShowMessageBox("Exception!", ex.Message);
-            return null;
+            return new List<CurrentClient>();
         }
     }
 
-    public static Client GetClientByBedId(int bedId)
+    public static CurrentClient? GetClientByBedId(int bedId)
     {
         try
         {
@@ -73,7 +76,7 @@ internal class DataBaseController
         }
     }
 
-    public static Client GetCLientById(int clientId)
+    public static CurrentClient? GetCLientById(int clientId)
     {
         try
         {
@@ -90,13 +93,13 @@ internal class DataBaseController
     {
         try
         {
-            Client removedClient = _dbContext.Clients.FirstOrDefault(c => c.Id == clientId);
+            CurrentClient? removedClient = _dbContext.Clients.FirstOrDefault(c => c.Id == clientId);
 
-            UpdateBedStatus(removedClient.BedId, false);
+            UpdateBedStatus(removedClient!.BedId, false);
             _dbContext.Clients.Remove(removedClient);
             AddClientToHistory(removedClient);
-
             _dbContext.SaveChanges();
+
         }
         catch (Exception ex)
         {
@@ -120,7 +123,7 @@ internal class DataBaseController
         _dbContext.SaveChanges();
     }
 
-    public static List<Bed> GetBedsListByRoomId(int roomId)
+    public static List<Bed>? GetBedsListByRoomId(int roomId)
     {
         try
         {
@@ -133,11 +136,11 @@ internal class DataBaseController
         }
     }
 
-    public static Bed GetBedById(int bedId)
+    public static Bed? GetBedById(int bedId)
     {
         try
         {
-            return _dbContext.Beds.Find(bedId);
+            return _dbContext.Beds.FirstOrDefault(c => c.Id == bedId);
         }
         catch (Exception ex)
         {
@@ -147,7 +150,7 @@ internal class DataBaseController
     }
     #endregion
     #region Room
-    public static Room GetRoomById(int roomId)
+    public static Room? GetRoomById(int roomId)
     {
         try
         {
@@ -182,12 +185,12 @@ internal class DataBaseController
         catch (Exception ex)
         {
             App.ShowMessageBox("Exception!", ex.Message);
-            return null;
+            return new List<Room>();
         }
     }
     #endregion
     #region History
-    private static void AddClientToHistory(Client client)
+    private static void AddClientToHistory(CurrentClient client)
     {
         try
         {
@@ -209,7 +212,7 @@ internal class DataBaseController
         catch (Exception ex)
         {
             App.ShowMessageBox("Exception!", ex.Message);
-            return null;
+            return new List<ClientsHistory>();
         }
     }
 
@@ -223,6 +226,42 @@ internal class DataBaseController
         catch (Exception ex)
         {
             App.ShowMessageBox("Exception!", ex.Message);
+        }
+    }
+    #endregion
+    #region ClientBooking
+    public static void AddBooking(string name, string surname, DateTime checkInDate, DateTime checkOutDate, int bedId)
+    {
+        try
+        {
+            ClientBooking newClientBooking = new()
+            {
+                Name = name,
+                Surname = surname,
+                CheckInDate = checkInDate,
+                CheckOutDate = checkOutDate,
+                BedId = bedId,
+                Bed = _dbContext.Beds.First(c => c.Id == bedId)
+            };
+
+            _dbContext.SaveChanges();
+        }
+        catch (Exception ex)
+        {
+            App.ShowMessageBox("", ex.Message);
+        }
+    }
+
+    public static List<ClientBooking>? GetClientBookingsByBedId(int bedId)
+    {
+        try
+        {
+            return _dbContext.ClientBooking.Where(c => c.BedId == bedId).ToList();
+        }
+        catch (Exception ex)
+        {
+            App.ShowMessageBox("", ex.Message);
+            return null;
         }
     }
     #endregion

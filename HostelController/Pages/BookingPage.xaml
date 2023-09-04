@@ -1,0 +1,27 @@
+﻿<Page x:Class="HostelController.Pages.BookingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+      Height="650" Width="750"
+      Style="{DynamicResource MahApps.Styles.Page}"
+      Background="White">
+
+    <Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Vertical" Margin="0 0 25 0" Width="160">
+                <TextBox Text="{Binding Name, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged }" Name="NameTxtBx" Style="{DynamicResource MahApps.Styles.TextBox}" Controls:ValidationHelper.ShowValidationErrorOnMouseOver="True" Controls:TextBoxHelper.Watermark="Имя" Margin="0 0 0 25" FontSize="16"/>
+                <ComboBox Text="{Binding RoomNumber, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged }" Name="RoomCmbBx" Style="{DynamicResource MahApps.Styles.ComboBox}" Controls:ValidationHelper.ShowValidationErrorOnMouseOver="True" Controls:TextBoxHelper.Watermark="Номер комнаты" Margin="0 0 0 25" FontSize="16" IsEditable="False" LostFocus="RoomCmbBx_LostFocus"/>
+                <DatePicker Name="DateOfEntry" Text="{Binding DateOfEntry, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged }" Controls:ValidationHelper.ShowValidationErrorOnMouseOver="True" Controls:TextBoxHelper.Watermark="Дата въезда" Margin="0 0 0 25" FontSize="16"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Width="160">
+                <TextBox Text="{Binding Surname, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" Name="SurnameTxtBx" Style="{DynamicResource MahApps.Styles.TextBox}" Controls:ValidationHelper.ShowValidationErrorOnMouseOver="True" Controls:TextBoxHelper.Watermark="Фамилия" Margin="0 0 0 25" FontSize="16"/>
+                <ComboBox Text="{Binding BedNumber, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" Name="BedCmbBx" Style="{DynamicResource MahApps.Styles.ComboBox}" Controls:ValidationHelper.ShowValidationErrorOnMouseOver="True" Controls:TextBoxHelper.Watermark="Номер кровати" Margin="0 0 0 25" FontSize="16" IsEditable="False"/>
+                <Controls:TimePicker Name="TimeOfEntry" SelectedDateTime="{Binding TimeOfEntry, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged }" Controls:ValidationHelper.ShowValidationErrorOnMouseOver="True" Controls:TextBoxHelper.Watermark="Время въезда" Margin="0 0 0 25" FontSize="16"/>
+            </StackPanel>
+        </StackPanel>
+
+        <Controls:NumericUpDown Value="{Binding ValueOfDays, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" Name="ValueOfDays" Controls:TextBoxHelper.Watermark="Число суток" Controls:ValidationHelper.ShowValidationErrorOnMouseOver="True" FontSize="16" Height="auto" Width="auto" Margin="290,409,290,209" Controls:TextBoxHelper.WatermarkAlignment="Left" Minimum="1"/>
+        <Button Name="BookButt" Style="{DynamicResource MahApps.Styles.Button.Square.Accent}" BorderBrush="White" Content="Забронировать" Margin="0,526,0,68" Height="50" Width="150" FontSize="16" Click="BookButt_Click"/>
+    </Grid>
+</Page>

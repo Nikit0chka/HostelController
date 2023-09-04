@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
 C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\App.xaml
-7-2092185541
+8-277215585
 
-131428464173
+15-747167284
 2382102372753
-MainWindow.xaml;Pages\AllRoomsInfoPage.xaml;Pages\BedAdministrationPage.xaml;Pages\CurrentRoomInfoPage.xaml;Pages\HistoryPage.xaml;Pages\RegistratePage.xaml;Windows\ExtendClientStayWindow.xaml;
+Pages\AllRoomsInfoPage.xaml;Pages\BedAdministrationPage.xaml;Pages\BookingPage.xaml;Pages\CurrentRoomInfoPage.xaml;Pages\HistoryPage.xaml;Pages\RegistratePage.xaml;Windows\ExtendClientStayWindow.xaml;Windows\MainWindow.xaml;
 
 False
 

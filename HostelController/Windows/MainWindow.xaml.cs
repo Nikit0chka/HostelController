@@ -32,33 +32,25 @@ public partial class MainWindow : MetroWindow
     private void ShowHistoryButt_Click(object sender, RoutedEventArgs e) => MainFrame.Navigate(new HistoryPage());
     private void ShowRegistrateButt_Click(object sender, RoutedEventArgs e) => MainFrame.Navigate(new RegistratePage());
 
-    private void ShowBookingButt_Click(object sender, RoutedEventArgs e)
-    {
-        //
-    }
+    private void ShowBookingButt_Click(object sender, RoutedEventArgs e) => MainFrame.Navigate(new BookingPage());
+
     #endregion
     #region Logic
     private void CheckBedsStatus()
     {
-        foreach (Client client in DataBaseController.GetClientsList())
+        foreach (CurrentClient client in DataBaseController.GetClientsList())
         {
             TimeSpan remainigClientTime = client.CheckOutDate - DateTime.Now;
 
-            if (remainigClientTime < TimeSpan.FromMinutes(30))
-            {
+            if (remainigClientTime < TimeSpan.FromHours(6))
                 EditExclamationTxtBlck(Brushes.Red, "!!");
-                UpdateAllRoomInfoIfOpen();
-                return;
-            }
-            else if (remainigClientTime < TimeSpan.FromHours(1))
-            {
+            else if (remainigClientTime < TimeSpan.FromHours(3))
                 EditExclamationTxtBlck(Brushes.Yellow, "!");
-                UpdateAllRoomInfoIfOpen();
-                return;
-            }
-        }
+            else
+                EditExclamationTxtBlck(Brushes.Gray, "");
 
-        EditExclamationTxtBlck(Brushes.Gray, "");
+            UpdateAllRoomInfoIfOpen();
+        }
     }
 
     private void StartTimer()
@@ -66,16 +58,17 @@ public partial class MainWindow : MetroWindow
         DispatcherTimer _timer = new();
         _timer.Tick += (sender, e) => CheckBedsStatus();
         _timer.Start();
-        _timer.Interval = TimeSpan.FromSeconds(1);
+        _timer.Interval = TimeSpan.FromMinutes(1);
     }
 
-    public Page GetActivePage() => MainFrame.Content as Page;
+    public Page GetActivePage() => (Page) MainFrame.Content;
 
-    private void EditExclamationTxtBlck(Brush color, string text) => Application.Current.Dispatcher.Invoke(() =>
-                                                     {
-                                                         ExclamationTxtBlck.Text = text;
-                                                         ExclamationTxtBlck.Foreground = color;
-                                                     });
+    private void EditExclamationTxtBlck(Brush color, string text) => Application.Current.Dispatcher.Invoke
+        (() =>
+        {
+            ExclamationTxtBlck.Text = text;
+            ExclamationTxtBlck.Foreground = color;
+        });
 
     private void UpdateAllRoomInfoIfOpen()
     {

@@ -4,11 +4,9 @@ C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelControlle
 C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\bin\Debug\net7.0-windows\HostelController.dll
 C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\bin\Debug\net7.0-windows\HostelController.pdb
 C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\HostelController.csproj.AssemblyReference.cache
-C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\MainWindow.g.cs
 C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\App.g.cs
 C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\HostelController_MarkupCompile.cache
 C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\HostelController_MarkupCompile.lref
-C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\MainWindow.baml
 C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\HostelController.g.resources
 C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\HostelController.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\HostelController.AssemblyInfoInputs.cache
@@ -73,3 +71,7 @@ C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelControlle
 C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\Pages\CurrentRoomInfoPage.g.cs
 C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\Windows\ExtendClientStayWindow.baml
 C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\Windows\ExtendClientStayWindow.g.cs
+C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\Windows\MainWindow.baml
+C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\Windows\MainWindow.g.cs
+C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\Pages\BookingPage.baml
+C:\Users\voron\OneDrive\Рабочий стол\HostelController\HostelController\obj\Debug\net7.0-windows\Pages\BookingPage.g.cs

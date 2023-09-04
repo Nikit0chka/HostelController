@@ -27,7 +27,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <DataGrid Name="ClientsHistoryDataGrid" Grid.Row="0" AutoGenerateColumns="False" Width="auto" HorizontalAlignment="Center">
+        <DataGrid Name="ClientsHistoryDataGrid" AutoGenerateColumns="False" Width="auto" HorizontalAlignment="Center">
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn ElementStyle="{DynamicResource MetroDataGridCheckBox}"
                                     EditingElementStyle="{DynamicResource MetroDataGridCheckBox}"

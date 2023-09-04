@@ -6,7 +6,7 @@ namespace HostelController.Windows;
 
 public partial class ExtendClientStayWindow : MetroWindow
 {
-    private readonly Client _client;
+    private readonly CurrentClient? _client;
     public ExtendClientStayWindow(int clientId)
     {
         DisableMainWindow();
@@ -28,11 +28,12 @@ public partial class ExtendClientStayWindow : MetroWindow
 
     private void AcceptButton_Click(object sender, RoutedEventArgs e)
     {
-        DataBaseController.UpdateClientStay(_client.Id, _client.CheckOutDate.AddDays((double) ValueOfDays.Value));
-
-        App.ShowMessageBox("", "Дата проживания продлена!");
+        if (_client is not null)
+            DataBaseController.UpdateClientStay(_client.Id, _client.CheckOutDate.AddDays((double) ValueOfDays.Value));
 
         Close();
+
+        App.ShowMessageBox("", "Дата проживания продлена");
     }
     #endregion
 }
